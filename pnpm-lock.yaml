@@ -12,8 +12,8 @@ importers:
         specifier: ^8.3.0
         version: 8.3.0
       authey:
-        specifier: ^0.6.0
-        version: 0.6.0(@auth/core@0.8.1)
+        specifier: git@github.com:AtakamaLLC/authey.git#0529bbc34db7bc43ce99b4ae620abb6bb8466285
+        version: github.com/AtakamaLLC/authey/0529bbc34db7bc43ce99b4ae620abb6bb8466285(@auth/core@0.8.1)
       fastify-plugin:
         specifier: ^4.5.0
         version: 4.5.0
@@ -1196,18 +1196,6 @@ packages:
     resolution: {integrity: sha512-kNOjDqAh7px0XWNI+4QbzoiR/nTkHAWNud2uvnJquD1/x5a7EQZMJT0AczqK0Qn67oY/TTQ1LbUKajZpp3I9tQ==}
     engines: {node: '>=8.0.0'}
     dev: true
-
-  /authey@0.6.0(@auth/core@0.8.1):
-    resolution: {integrity: sha512-/ecKKqMJqh4K33sy5lZf9pI0Kcv2An8XgJ8ezYDWeohzepFCmmjUBkPsxO6FIYMoIek8M5qxeFqHvhFWkc6pUA==}
-    peerDependencies:
-      '@auth/core': ^0.8.0
-    dependencies:
-      '@auth/core': 0.8.1
-      '@polka/send-type': 0.5.2
-      node-fetch-native: 1.1.1
-      requrl: 3.0.2
-      set-cookie-parser: 2.6.0
-    dev: false
 
   /available-typed-arrays@1.0.5:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
@@ -5389,3 +5377,18 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
+
+  github.com/AtakamaLLC/authey/0529bbc34db7bc43ce99b4ae620abb6bb8466285(@auth/core@0.8.1):
+    resolution: {tarball: https://codeload.github.com/AtakamaLLC/authey/tar.gz/0529bbc34db7bc43ce99b4ae620abb6bb8466285}
+    id: github.com/AtakamaLLC/authey/0529bbc34db7bc43ce99b4ae620abb6bb8466285
+    name: authey
+    version: 0.6.0
+    peerDependencies:
+      '@auth/core': ^0.8.0
+    dependencies:
+      '@auth/core': 0.8.1
+      '@polka/send-type': 0.5.2
+      node-fetch-native: 1.1.1
+      requrl: 3.0.2
+      set-cookie-parser: 2.6.0
+    dev: false

@@ -1,1 +1,1 @@
-declare module '@fastify/middie/engine'
+declare module '@fastify/middie/lib/engine'

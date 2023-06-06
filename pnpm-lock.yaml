@@ -12,7 +12,7 @@ importers:
         specifier: ^8.3.0
         version: 8.3.0
       authey:
-        specifier: git@github.com:AtakamaLLC/authey.git#0529bbc34db7bc43ce99b4ae620abb6bb8466285
+        specifier: ssh://git@github.com:AtakamaLLC/authey.git#0529bbc34db7bc43ce99b4ae620abb6bb8466285
         version: github.com/AtakamaLLC/authey/0529bbc34db7bc43ce99b4ae620abb6bb8466285(@auth/core@0.8.1)
       fastify-plugin:
         specifier: ^4.5.0

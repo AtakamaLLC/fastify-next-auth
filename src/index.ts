@@ -1,14 +1,14 @@
 import type { IncomingMessage, ServerResponse } from 'http'
 import type { AuthConfig, Session } from '@auth/core/types'
-import type { FastifyPluginCallback, FastifyRequest } from 'fastify'
+import type { FastifyPluginAsync, FastifyRequest } from 'fastify'
 import fastifyPlugin from 'fastify-plugin'
 import Middie from '@fastify/middie/engine'
 import { createAuthMiddleware, getSession } from 'authey'
 
-const plugin: FastifyPluginCallback<AuthConfig> = async (
+const plugin: FastifyPluginAsync<AuthConfig> = async (
   fastify,
   options,
-  next,
+
 ) => {
   const middleware = createAuthMiddleware(options)
 
@@ -28,6 +28,12 @@ const plugin: FastifyPluginCallback<AuthConfig> = async (
     req.raw.body = req.body
     req.raw.query = req.query
     reply.raw.log = req.log
+
+    for (const [key, val] of Object.entries(reply.getHeaders())) {
+      //
+      reply.raw.setHeader(key, val)
+    }
+
     middie.run(req.raw, reply.raw, next)
   }
 
@@ -36,8 +42,6 @@ const plugin: FastifyPluginCallback<AuthConfig> = async (
   fastify.decorate('getSession', function (req: FastifyRequest) {
     return getSession(req.raw, options)
   })
-
-  next()
 }
 
 const fastifyNextAuth = fastifyPlugin(plugin, {

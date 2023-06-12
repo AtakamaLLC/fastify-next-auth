@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "@fastify/middie": "^8.3.0",
-    "authey": "ssh://git@github.com:AtakamaLLC/authey.git#0529bbc34db7bc43ce99b4ae620abb6bb8466285",
+    "authey": "0.6.0",
     "fastify-plugin": "^4.5.0"
   },
   "devDependencies": {
@@ -83,5 +83,6 @@
     "rules": {
       "unicorn/prefer-node-protocol": "off"
     }
-  }
+  },
+  "packageManager": "yarn@3.6.0"
 }

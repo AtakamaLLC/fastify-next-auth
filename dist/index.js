@@ -35,14 +35,135 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 var import_fastify_plugin = __toESM(require("fastify-plugin"));
-var import_engine = __toESM(require("@fastify/middie/lib/engine"));
 var import_authey = require("authey");
+
+// src/middie.js
+var import_reusify = __toESM(require("reusify"));
+var import_path_to_regexp = require("path-to-regexp");
+function middie(complete) {
+  const middlewares = [];
+  const pool = (0, import_reusify.default)(Holder);
+  return {
+    use,
+    run
+  };
+  function use(url, f) {
+    if (f === void 0) {
+      f = url;
+      url = null;
+    }
+    let regexp;
+    if (url) {
+      regexp = (0, import_path_to_regexp.pathToRegexp)(sanitizePrefixUrl(url), [], {
+        end: false,
+        strict: false
+      });
+    }
+    if (Array.isArray(f)) {
+      for (const val of f) {
+        middlewares.push({
+          regexp,
+          fn: val
+        });
+      }
+    } else {
+      middlewares.push({
+        regexp,
+        fn: f
+      });
+    }
+    return this;
+  }
+  function run(req, res, ctx) {
+    if (!middlewares.length) {
+      complete(null, req, res, ctx);
+      return;
+    }
+    req.originalUrl = req.url;
+    const holder = pool.get();
+    holder.req = req;
+    holder.res = res;
+    holder.url = sanitizeUrl(req.url);
+    holder.context = ctx;
+    holder.done();
+  }
+  function Holder() {
+    this.next = null;
+    this.req = null;
+    this.res = null;
+    this.url = null;
+    this.context = null;
+    this.i = 0;
+    const that = this;
+    this.done = function(err) {
+      const req = that.req;
+      const res = that.res;
+      const url = that.url;
+      const context = that.context;
+      const i = that.i++;
+      req.url = req.originalUrl;
+      if (res.finished === true || res.writableEnded === true) {
+        that.req = null;
+        that.res = null;
+        that.context = null;
+        that.i = 0;
+        pool.release(that);
+        return;
+      }
+      if (err || middlewares.length === i) {
+        complete(err, req, res, context);
+        that.req = null;
+        that.res = null;
+        that.context = null;
+        that.i = 0;
+        pool.release(that);
+      } else {
+        const middleware = middlewares[i];
+        const fn = middleware.fn;
+        const regexp = middleware.regexp;
+        if (regexp) {
+          const result = regexp.exec(url);
+          if (result) {
+            req.url = req.url.replace(result[0], "");
+            if (req.url[0] !== "/")
+              req.url = `/${req.url}`;
+            fn(req, res, that.done);
+          } else {
+            that.done();
+          }
+        } else {
+          fn(req, res, that.done);
+        }
+      }
+    };
+  }
+}
+function sanitizeUrl(url) {
+  for (let i = 0, len = url.length; i < len; i++) {
+    const charCode = url.charCodeAt(i);
+    if (charCode === 63 || charCode === 35)
+      return url.slice(0, i);
+  }
+  return url;
+}
+function sanitizePrefixUrl(url) {
+  if (url === "")
+    return url;
+  if (url === "/")
+    return "";
+  if (url[url.length - 1] === "/")
+    return url.slice(0, -1);
+  return url;
+}
+var middie_default = middie;
+
+// src/index.ts
 var plugin = async (fastify, options) => {
   const middleware = (0, import_authey.createAuthMiddleware)(options);
-  const middie = (0, import_engine.default)((err, _req, _res, next) => {
+  const middie2 = middie_default((err, _req, _res, next) => {
     next(err);
   });
-  middie.use(middleware);
+  middie2.use(middleware);
   function runMiddie(req, reply, next) {
     req.raw.originalUrl = req.raw.url;
     req.raw.id = req.id;
@@ -56,7 +177,7 @@ var plugin = async (fastify, options) => {
     for (const [key, val] of Object.entries(reply.getHeaders())) {
       reply.raw.setHeader(key, val);
     }
-    middie.run(req.raw, reply.raw, next);
+    middie2.run(req.raw, reply.raw, next);
   }
   fastify.addHook("onRequest", runMiddie);
   fastify.decorate("getSession", function(req) {
@@ -72,3 +193,10 @@ var src_default = fastifyNextAuth;
 0 && (module.exports = {
   fastifyNextAuth
 });
+/*!
+ * Original code by Fastify
+ * MIT Licensed, Copyright 2017-2018 Fastify, see https://github.com/fastify/middie/blob/master/LICENSE for details
+ *
+ * Credits to the Fastify team for the middleware support logic:
+ * https://github.com/fastify/middie/blob/master/lib/engine.js
+ */

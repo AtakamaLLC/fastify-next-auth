@@ -3,17 +3,16 @@ import Fastify from 'fastify'
 import fastifyEnv from '@fastify/env'
 import GithubProvider from '@auth/core/providers/github'
 import NextAuthPlugin from '../index'
-import type { AuthConfig } from '../index'
 
 const schema = {
   type: 'object',
-  required: ['NEXTAUTH_URL', 'NEXTAUTH_SECRET', 'GITHUB_CLIENT_ID', 'GITHUB_CLIENT_SECRET'],
+  required: ['NEXTAUTH_URL', 'AUTH_SECRET', 'GITHUB_CLIENT_ID', 'GITHUB_CLIENT_SECRET'],
   properties: {
     NEXTAUTH_URL: {
       type: 'string',
       default: 'http://localhost:3000',
     },
-    NEXTAUTH_SECRET: {
+    AUTH_SECRET: {
       type: 'string',
     },
     GITHUB_CLIENT_ID: {
@@ -36,14 +35,15 @@ export async function buildServer() {
   })
   await server.after()
   server.register(NextAuthPlugin, {
-    secret: process.env.NEXTAUTH_SECRET,
+    trustHost: true,
+    secret: process.env.AUTH_SECRET,
     providers: [
       GithubProvider({
         clientId: process.env.GITHUB_CLIENT_ID!,
         clientSecret: process.env.GITHUB_CLIENT_SECRET!,
       }),
     ],
-  } as AuthConfig)
+  })
 
   return server
 }

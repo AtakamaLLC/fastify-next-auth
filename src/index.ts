@@ -2,13 +2,12 @@ import type { IncomingMessage, ServerResponse } from 'http'
 import type { AuthConfig, Session } from '@auth/core/types'
 import type { FastifyPluginAsync, FastifyRequest } from 'fastify'
 import fastifyPlugin from 'fastify-plugin'
-import Middie from '@fastify/middie/lib/engine'
 import { createAuthMiddleware, getSession } from 'authey'
+import Middie from './middie'
 
 const plugin: FastifyPluginAsync<AuthConfig> = async (
   fastify,
   options,
-
 ) => {
   const middleware = createAuthMiddleware(options)
 

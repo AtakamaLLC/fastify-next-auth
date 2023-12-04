@@ -27,12 +27,9 @@ const plugin: FastifyPluginAsync<AuthConfig> = async (
     req.raw.body = req.body
     req.raw.query = req.query
     reply.raw.log = req.log
-
     for (const [key, val] of Object.entries(reply.getHeaders())) {
-      //
       reply.raw.setHeader(key, val)
     }
-
     middie.run(req.raw, reply.raw, next)
   }
 

@@ -18,6 +18,10 @@ const plugin: FastifyPluginAsync<AuthConfig> = async (
   middie.use(middleware)
 
   function runMiddie(req: any, reply: any, next: (err?: Error) => void) {
+    if (!req.url.startsWith("/api/auth/")) {
+      next()
+      return
+    }
     req.raw.originalUrl = req.raw.url
     req.raw.id = req.id
     req.raw.hostname = req.hostname

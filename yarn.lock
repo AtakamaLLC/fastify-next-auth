@@ -77,10 +77,10 @@
   resolved "https://registry.yarnpkg.com/@antfu/utils/-/utils-0.7.5.tgz#c36f37add92a7de57b9c29ae0c1f399706bff345"
   integrity sha512-dlR6LdS+0SzOAPx/TPRhnoi7hE251OVeT2Snw0RguNbBSbjUHdWr0l3vcUUDg26rEysT89kCbtw1lVorBXLLCg==
 
-"@auth/core@^0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@auth/core/-/core-0.9.0.tgz#7a5d66eea0bc059cef072734698547ae2a0c86a6"
-  integrity sha512-W2WO0WCBg1T3P8+yjQPzurTQhPv6ecBYfJ2oE3uvXPAX5ZLWAMSjKFAIa9oLZy5pwrB+YehJZPnlIxVilhrVcg==
+"@auth/core@^0.10.0":
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/@auth/core/-/core-0.10.4.tgz#0c2cf180b1030fd972d1664d8be6335d905edb56"
+  integrity sha512-g4rwt0tUZ9FI1weB+FdfgOrO8StJAZ+A7aR7J0smfgXCJFOBiYeKL6ZLY/xG7c6jloncIK6PTArYpc1L98PUWA==
   dependencies:
     "@panva/hkdf" "^1.0.4"
     cookie "0.5.0"
@@ -1066,13 +1066,13 @@ atomic-sleep@^1.0.0:
   resolved "https://registry.yarnpkg.com/atomic-sleep/-/atomic-sleep-1.0.0.tgz#eb85b77a601fc932cfe432c5acd364a9e2c9075b"
   integrity sha512-kNOjDqAh7px0XWNI+4QbzoiR/nTkHAWNud2uvnJquD1/x5a7EQZMJT0AczqK0Qn67oY/TTQ1LbUKajZpp3I9tQ==
 
-authey@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/authey/-/authey-0.7.0.tgz#ff6875c1724a397a38cb50a3b859b663fdc2e6ab"
-  integrity sha512-ChxzOmpGosN4iyDWqos5eWjmOrg0Sq/Es7tjiqeFV/S2REOn7BE6IFNHXduRCIFNqOrMaTk+w8Cl9iDbWrGhEQ==
+authey@^0.8.1:
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/authey/-/authey-0.8.3.tgz#2ae61d4ccf03e9d486aebcf4f656d922e6498b58"
+  integrity sha512-+HDL5gfo/9cLuVcH0grlpbVPtSyjPe8hwL/KhQE1LkL+rP5q7BLLyl8Q+OK2In/elomSqvbcX3J5AfgDsCBIYQ==
   dependencies:
     "@polka/send-type" "^0.5.2"
-    node-fetch-native "^1.2.0"
+    node-fetch-native "^1.4.0"
     requrl "^3.0.2"
     set-cookie-parser "^2.6.0"
 
@@ -2904,10 +2904,15 @@ negotiator@^0.6.3:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
-node-fetch-native@^1.0.2, node-fetch-native@^1.2.0:
+node-fetch-native@^1.0.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/node-fetch-native/-/node-fetch-native-1.2.0.tgz#13ec6df98f33168958dbfb6945f10aedf42e7ea8"
   integrity sha512-5IAMBTl9p6PaAjYCnMv5FmqIF6GcZnawAVnzaCG0rX2aYZJ4CxEkZNtVPuTRug7fL7wyM5BQYTlAzcyMPi6oTQ==
+
+node-fetch-native@^1.4.0:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/node-fetch-native/-/node-fetch-native-1.4.1.tgz#5a336e55b4e1b1e72b9927da09fecd2b374c9be5"
+  integrity sha512-NsXBU0UgBxo2rQLOeWNZqS3fvflWePMECr8CoSWoSTqCqGbVVsvl9vZu1HfQicYN0g5piV9Gh8RTEvo/uP752w==
 
 node-gyp@^9.0.0:
   version "9.4.0"

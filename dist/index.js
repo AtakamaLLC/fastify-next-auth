@@ -165,6 +165,10 @@ var plugin = async (fastify, options) => {
   });
   middie2.use(middleware);
   function runMiddie(req, reply, next) {
+    if (!req.url.startsWith("/api/auth/")) {
+      next();
+      return;
+    }
     req.raw.originalUrl = req.raw.url;
     req.raw.id = req.id;
     req.raw.hostname = req.hostname;

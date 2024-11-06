@@ -178,9 +178,8 @@ var plugin = async (fastify, options) => {
     req.raw.body = req.body;
     req.raw.query = req.query;
     reply.raw.log = req.log;
-    for (const [key, val] of Object.entries(reply.getHeaders())) {
+    for (const [key, val] of Object.entries(reply.getHeaders()))
       reply.raw.setHeader(key, val);
-    }
     middie2.run(req.raw, reply.raw, next);
   }
   fastify.addHook("onRequest", runMiddie);
@@ -189,7 +188,7 @@ var plugin = async (fastify, options) => {
   });
 };
 var fastifyNextAuth = (0, import_fastify_plugin.default)(plugin, {
-  fastify: "4.x",
+  fastify: ">=4.0.0",
   name: "fastify-next-auth"
 });
 var src_default = fastifyNextAuth;

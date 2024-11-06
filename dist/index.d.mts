@@ -6,7 +6,7 @@ declare const fastifyNextAuth: FastifyPluginAsync<AuthConfig>;
 
 declare module 'fastify' {
     interface FastifyInstance {
-        getSession(req: FastifyRequest): Session;
+        getSession(req: FastifyRequest): Promise<Session | null>;
     }
 }
 

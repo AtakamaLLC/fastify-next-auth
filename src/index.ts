@@ -18,7 +18,7 @@ const plugin: FastifyPluginAsync<AuthConfig> = async (
   middie.use(middleware)
 
   function runMiddie(req: any, reply: any, next: (err?: Error) => void) {
-    if (!req.url.startsWith("/api/auth/")) {
+    if (!req.url.startsWith('/api/auth/')) {
       next()
       return
     }
@@ -31,9 +31,9 @@ const plugin: FastifyPluginAsync<AuthConfig> = async (
     req.raw.body = req.body
     req.raw.query = req.query
     reply.raw.log = req.log
-    for (const [key, val] of Object.entries(reply.getHeaders())) {
+    for (const [key, val] of Object.entries(reply.getHeaders()))
       reply.raw.setHeader(key, val)
-    }
+
     middie.run(req.raw, reply.raw, next)
   }
 
@@ -45,7 +45,7 @@ const plugin: FastifyPluginAsync<AuthConfig> = async (
 }
 
 const fastifyNextAuth = fastifyPlugin(plugin, {
-  fastify: '4.x',
+  fastify: '>=4.0.0',
   name: 'fastify-next-auth',
 })
 
@@ -58,6 +58,6 @@ export default fastifyNextAuth
 
 declare module 'fastify' {
   interface FastifyInstance {
-    getSession(req: FastifyRequest): Session
+    getSession(req: FastifyRequest): Promise<Session | null>
   }
 }

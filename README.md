@@ -62,8 +62,8 @@ signOut()
 <b>Decorators</b>
 
 ```ts
-fastify.get('/api/user', async function (req) {
-  const { user } = await this.getSession(req)
+fastify.get('/api/user', async (req) => {
+  const { user } = await fastify.getSession(req)
   return user
 })
 ```

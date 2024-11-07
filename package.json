@@ -61,20 +61,20 @@
   },
   "dependencies": {
     "authey": "^0.8.1",
-    "fastify-plugin": "^4.5.0",
+    "fastify-plugin": "^5.0.1",
     "path-to-regexp": "^6.2.1",
     "reusify": "^1.0.4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.6",
     "@auth/core": "^0.10.0",
-    "@fastify/env": "^4.2.0",
+    "@fastify/env": "^5.0.1",
     "@types/node": "^20.3.2",
     "@types/tap": "^15.0.8",
     "bumpp": "^9.1.1",
     "eslint": "^8.43.0",
     "esno": "^0.16.3",
-    "fastify": "4.18.0",
+    "fastify": "5.1.0",
     "taze": "^0.10.3",
     "tsup": "7.1.0",
     "typescript": "5.1.5",
@@ -83,8 +83,8 @@
   "eslintConfig": {
     "extends": "@antfu",
     "rules": {
-      "unicorn/prefer-node-protocol": "off"
+      "unicorn/prefer-node-protocol": "off",
+      "n/prefer-global/process": "off"
     }
-  },
-  "packageManager": "yarn@3.6.0"
+  }
 }
